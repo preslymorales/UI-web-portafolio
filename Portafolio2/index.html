@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="oscuro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presly Morales | Portafolio</title>
+<meta name="description" content="Portafolio de Presly David Morales Velastegui, estudiante de Ingeniería en Ciencias de la Computación en la EPN.">
+<style>
+/* 1. SISTEMA DE TEMAS (Principio de Nielsen: Consistencia y Estándares) */
+:root {
+  /* Tema Oscuro (Por defecto) */
+  --bg: #0f172a; --bg2: #1e293b; --card: #0b1120; --line: #334155;
+  --tx: #f8fafc; --mut: #94a3b8; --blue: #3b82f6; --gold: #eab308;
+  --ok: #10b981; --err: #ef4444; --r: 16px;
+}
+
+[data-theme="claro"] {
+  /* Tema Claro - Alto contraste de lectura */
+  --bg: #f8fafc; --bg2: #e2e8f0; --card: #ffffff; --line: #cbd5e1;
+  --tx: #0f172a; --mut: #475569; --blue: #2563eb; --gold: #d97706;
+}
+
+[data-theme="azulado"] {
+  /* Tema Azulado - Elegante y moderno */
+  --bg: #082f49; --bg2: #0c4a6e; --card: #042f2e; --line: #0ea5e9;
+  --tx: #f0f9ff; --mut: #bae6fd; --blue: #38bdf8; --gold: #fde047;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transition:background 0.3s, color 0.3s}
+a{color:var(--blue);text-decoration:none;transition:0.2s}
+a:hover{color:var(--gold)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+/* Navegación y Header */
+header{position:sticky;top:0;z-index:50;background:rgba(var(--bg),0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px}
+.logo{font-weight:700;font-size:20px;color:var(--tx)}
+nav{display:flex;gap:15px;align-items:center}
+nav a{color:var(--mut);font-weight:500;padding:8px 12px;border-radius:8px;font-size:15px}
+nav a:hover, nav a.active{color:var(--tx);background:var(--bg2)}
+
+/* Selector de Temas Profesional */
+.theme-switch{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:8px;border:1px solid var(--line)}
+.btn-theme{background:transparent;border:none;cursor:pointer;font-size:13px;font-weight:600;padding:6px 12px;border-radius:5px;color:var(--mut);transition:0.2s;text-transform:uppercase;letter-spacing:0.5px}
+.btn-theme:hover{background:var(--line);color:var(--tx)}
+.btn-theme.active{background:var(--blue);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.15)}
+
+/* Botones */
+.btn{font:inherit;font-size:16px;cursor:pointer;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:10px 18px;border-radius:10px;font-weight:500;transition:0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--blue);background:var(--line)}
+.btn.main{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.main:hover{background:var(--gold);border-color:var(--gold);color:#000}
+
+/* Layout Principal */
+main{max-width:1100px;margin:auto;padding:0 20px}
+section{padding:80px 0 20px}
+h1{font-size:clamp(36px,5vw,56px);line-height:1.1;margin:10px 0 20px}
+h1 span{color:var(--blue)}
+h2{font-size:32px;display:flex;align-items:center;gap:15px;margin-bottom:30px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.lead{color:var(--mut);font-size:20px;max-width:70ch;margin-bottom:30px}
+
+/* Hero Section */
+.hero{display:flex;flex-direction:column-reverse;gap:40px;align-items:center;padding-top:60px}
+@media(min-width:800px){.hero{flex-direction:row;justify-content:space-between}}
+.hero-text{flex:1}
+.role{color:var(--mut);text-transform:uppercase;letter-spacing:1px;font-size:14px;font-weight:600}
+
+/* Contenedor Interactivo de la Foto */
+.photo-container{width:280px;height:280px;border-radius:50%;background:var(--bg2);border:3px dashed var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:0.3s;flex-shrink:0;box-shadow:0 0 40px rgba(59, 130, 246, 0.15)}
+.photo-container:hover{border-color:var(--blue);border-style:solid}
+.photo-container img{width:100%;height:100%;object-fit:cover;z-index:2;position:absolute;top:0;left:0}
+.photo-hint{position:absolute;z-index:1;text-align:center;color:var(--mut);font-size:14px;padding:20px}
+.photo-container:hover .photo-hint{color:var(--blue)}
+
+/* Botones Contacto / Redes */
+.cta-group{display:flex;gap:15px;flex-wrap:wrap;margin-top:10px}
+.social-links{display:flex;gap:12px;margin-top:20px}
+.social-links a{display:flex;align-items:center;justify-content:center;width:45px;height:45px;border-radius:50%;background:var(--bg2);color:var(--tx);font-size:20px;border:1px solid var(--line)}
+.social-links a:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* Grid de Tarjetas */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:25px;transition:0.2s}
+.card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.card h3{margin:0 0 10px;font-size:22px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.tag{background:var(--bg2);border:1px solid var(--line);padding:4px 12px;border-radius:20px;font-size:14px;color:var(--mut)}
+
+/* Botones Flotantes */
+.float-btn{position:fixed;bottom:25px;border-radius:50px;padding:12px 22px;display:flex;align-items:center;gap:10px;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:90;transition:0.3s;color:#fff;text-decoration:none}
+.float-wa{left:25px;background:#25D366}
+.float-wa:hover{background:#20bd5a;transform:translateY(-3px)}
+.float-up{right:25px;background:var(--blue);border:1px solid var(--line);display:none;cursor:pointer}
+.float-up:hover{background:var(--gold);color:#000}
+
+/* Íconos SVG */
+svg{width:20px;height:20px;fill:currentColor}
+
+footer{text-align:center;padding:40px 20px;color:var(--mut);border-top:1px solid var(--line);margin-top:60px;font-size:15px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="logo">PM</div>
+    <nav>
+      <a href="#perfil">Perfil</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+      
+      <!-- Controles de Tema Serios -->
+      <div class="theme-switch" role="group" aria-label="Cambiar tema de color">
+        <button class="btn-theme active" data-t="oscuro" aria-pressed="true">Oscuro</button>
+        <button class="btn-theme" data-t="claro" aria-pressed="false">Claro</button>
+        <button class="btn-theme" data-t="azulado" aria-pressed="false">Azul</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- SECCIÓN INICIO -->
+  <section id="inicio" class="hero">
+    <div class="hero-text">
+      <div class="role">Ingeniería en Ciencias de la Computación</div>
+      <h1>Presly David <span>Morales</span></h1>
+      <p class="lead">Estudiante de la Escuela Politécnica Nacional. Orientado al desarrollo de software, inteligencia artificial, visión por computadora e ingeniería de datos.</p>
+      
+      <div class="cta-group">
+        <a href="#contacto" class="btn main">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Contáctame
+        </a>
+        <a href="#proyectos" class="btn">
+          <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> Ver Proyectos
+        </a>
+      </div>
+
+      <div class="social-links">
+        <a href="https://github.com/preslymorales" target="_blank" title="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/preslymorales" target="_blank" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- EL CONTENEDOR MÁGICO PARA TU FOTO -->
+    <div class="photo-container" id="uploadArea" title="Haz clic para añadir o cambiar tu foto">
+      <div class="photo-hint">
+        <svg style="width:40px;height:40px;margin-bottom:10px" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><br>
+        Haz clic aquí para cargar<br>tu foto (image_f51aa5.jpg)
+      </div>
+      <img id="profileImage" style="display:none" alt="Presly Morales">
+      <input type="file" id="imageInput" accept="image/*" style="display:none">
+    </div>
+  </section>
+
+  <!-- SECCIÓN PERFIL / HABILIDADES -->
+  <section id="perfil">
+    <h2>Perfil y Habilidades</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Lenguajes</h3>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">C++</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Librerías / Tecnologías</h3>
+        <div class="tags">
+          <span class="tag">Machine Learning</span><span class="tag">Computer Vision</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">REST APIs</span><span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Herramientas</h3>
+        <div class="tags">
+          <span class="tag">VS Code</span><span class="tag">Git / GitHub</span><span class="tag">Visual Studio</span><span class="tag">Packet Tracer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PROYECTOS -->
+  <section id="proyectos">
+    <h2>Proyectos Destacados</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Detección de Enfermedades en Cacao</h3>
+        <p style="color:var(--mut);font-size:15px;margin-bottom:10px">2024 • Python, Machine Learning, Computer Vision</p>
+        <p>Modelos de aprendizaje para diagnóstico visual de patologías agrícolas con API backend y frontend en tiempo real.</p>
+      </div>
+      <div class="card">
+        <h3>Predicción de Tráfico Vehicular</h3>
+        <p style="color:var(--mut);font-size:15px;margin-bottom:10px">2024 • Python, Análisis Estadístico</p>
+        <p>Implementación de modelos predictivos sobre series de datos históricos aplicando técnicas matemáticas.</p>
+      </div>
+      <div class="card">
+        <h3>Gestor de Inventario Comercial</h3>
+        <p style="color:var(--mut);font-size:15px;margin-bottom:10px">2023 • Java, MySQL, MVC</p>
+        <p>Aplicación de escritorio con interfaz gráfica, módulos CRUD optimizados y validación de integridad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p class="lead">¿Te interesa mi perfil para prácticas pre-profesionales? Hablemos.</p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(250px,1fr));">
+      <div class="card" style="text-align:center">
+        <svg style="width:30px;height:30px;color:var(--blue);margin-bottom:10px" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <h3>Correo</h3>
+        <a href="mailto:davidmorales15102004@gmail.com">davidmorales15102004@gmail.com</a>
+      </div>
+      <div class="card" style="text-align:center">
+        <svg style="width:30px;height:30px;color:var(--blue);margin-bottom:10px" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <h3>Teléfono</h3>
+        <a href="tel:+593990119501">+593 990119501</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Presly David Morales Velastegui. Todos los derechos reservados.</p>
+</footer>
+
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/593990119501?text=Hola%20Presly,%20he%20visto%20tu%20portafolio" target="_blank" class="float-btn float-wa" aria-label="Escríbeme por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35ZM12.05 21.8a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88ZM20.46 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42Z"/></svg>
+  WhatsApp
+</a>
+
+<!-- BOTÓN FLOTANTE ARRIBA -->
+<div id="btnUp" class="float-btn float-up" onclick="window.scrollTo(0,0)">
+  <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+</div>
+
+<script>
+  /* =========================================
+     1. SISTEMA DE TEMAS (Nielsen: Reconocimiento y Recuperación)
+     ========================================= */
+  const htmlElement = document.documentElement;
+  const themeBtns = document.querySelectorAll('.btn-theme');
+
+  // Recuperar el tema guardado o usar "oscuro" por defecto
+  const savedTheme = localStorage.getItem('pm-theme') || 'oscuro';
+  
+  // Aplicar tema
+  function applyTheme(themeName) {
+    htmlElement.setAttribute('data-theme', themeName);
+    localStorage.setItem('pm-theme', themeName); // Guarda la elección para futuras visitas
+
+    // Actualizar el estado visual de los botones
+    themeBtns.forEach(btn => {
+      const isActive = btn.dataset.t === themeName;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+  }
+
+  // Aplicar el tema inicial
+  applyTheme(savedTheme);
+
+  // Escuchar clics en los botones de tema
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyTheme(btn.dataset.t);
+    });
+  });
+
+  /* =========================================
+     2. LÓGICA DE LA FOTO BASE64
+     ========================================= */
+  const uploadArea = document.getElementById('uploadArea');
+  const imageInput = document.getElementById('imageInput');
+  const profileImage = document.getElementById('profileImage');
+
+  const savedPhoto = localStorage.getItem('miFotoPresly');
+  if (savedPhoto) {
+    profileImage.src = savedPhoto;
+    profileImage.style.display = 'block';
+  }
+
+  uploadArea.addEventListener('click', () => {
+    imageInput.click();
+  });
+
+  imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64String = e.target.result;
+        profileImage.src = base64String;
+        profileImage.style.display = 'block';
+        try {
+          localStorage.setItem('miFotoPresly', base64String);
+        } catch (error) {
+          console.log("Imagen grande para localStorage, se visualiza temporalmente.");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  /* =========================================
+     3. BOTÓN VOLVER ARRIBA
+     ========================================= */
+  window.addEventListener('scroll', () => {
+    document.getElementById('btnUp').style.display = window.scrollY > 300 ? 'flex' : 'none';
+  });
+</script>
+</body>
+</html>
